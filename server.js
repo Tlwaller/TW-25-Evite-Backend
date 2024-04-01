@@ -23,7 +23,7 @@ client.connect();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://tlwaller.github.io", "localhost:3000"],
+    origin: ["https://tlwaller.github.io", "http://localhost:3000"],
     methods: ["GET", "POST"], // Add other methods if needed
     optionsSuccessStatus: 200, // Some legacy browsers choke on 204
   })
