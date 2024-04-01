@@ -1,8 +1,14 @@
 require("dotenv").config();
 const express = require("express");
-const app = express();
 const { Client } = require("pg");
-const { getGuests, postGuest } = require("./src/controller");
+const cors = require("cors");
+const app = express();
+const {
+  postGuest,
+  getGuests,
+  editGuest,
+  deleteGuest,
+} = require("./src/controller");
 const { PORT, DATABASE_URL } = process.env;
 
 const client = new Client({
@@ -15,9 +21,12 @@ const client = new Client({
 client.connect();
 
 app.use(express.json());
+app.use(cors());
 
-app.get("/", getGuests);
 app.post("/", postGuest);
+app.get("/", getGuests);
+app.put("/:id", editGuest);
+app.delete("/:id", deleteGuest);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
