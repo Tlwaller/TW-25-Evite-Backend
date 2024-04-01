@@ -21,7 +21,13 @@ const client = new Client({
 client.connect();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://tlwaller.github.io",
+    methods: ["GET", "POST"], // Add other methods if needed
+    optionsSuccessStatus: 200, // Some legacy browsers choke on 204
+  })
+);
 
 app.post("/", postGuest);
 app.get("/", getGuests);
